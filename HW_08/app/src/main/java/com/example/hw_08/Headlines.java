@@ -14,12 +14,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Headlines extends Activity {
     ArrayList<SingleItem> newsList = new ArrayList<SingleItem>();
     ListView headlines; String URL = "", Caption = ""; SingleItem selectedNewsItem;
+    int index;
+    TextView title;
+    int[] icon = {R.drawable.logo_thanhnien,R.drawable.logo_vnexpress,R.drawable.logo_tuoitre};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,9 @@ public class Headlines extends Activity {
         Bundle myBundle = callingIntent.getExtras();
         URL = myBundle.getString("URL");
         Caption = myBundle.getString("Caption");
-        this.setTitle("ITEMS IN CHANNELS " + Caption);
+        index = myBundle.getInt("Index");
+        title = (TextView) findViewById(R.id.titleheadline);
+        title.setText("ITEM IN CHANNEL " + Caption);
         headlines = (ListView) this.findViewById(R.id.headlines);
         headlines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View v, int index, long id) {
@@ -53,7 +59,7 @@ public class Headlines extends Activity {
 //CAUTION: sometimes TITLE and DESCRIPTION include HTML markers
             final Uri storyLink = Uri.parse(selectedStoryItem.getLink());
             AlertDialog.Builder myBuilder = new AlertDialog.Builder(this);
-            myBuilder.setIcon(R.drawable.logo_thanhnien)
+            myBuilder.setIcon(icon[index])
                     .setTitle(Html.fromHtml(Caption) )
                     .setMessage(title + "\n\n" + Html.fromHtml(description) + "\n")
                     .setPositiveButton("Close", null)

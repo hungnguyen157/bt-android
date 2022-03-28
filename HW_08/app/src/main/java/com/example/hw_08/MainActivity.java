@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ImageView thanhnien, vnex, tuoitre;
 
     int index = -1;
-
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         thanhnien.setOnClickListener(this);
         vnex.setOnClickListener(this);
         tuoitre.setOnClickListener(this);
-
-        this.setTitle("NEWS APP");
+        title = (TextView) findViewById(R.id.title);
+        title.setText("NEW APPS");
     }
 
     @Override
